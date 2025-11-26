@@ -1,0 +1,148 @@
+/* Style the header with a grey background and some padding */
+/* Style the header with a grey background and some padding */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;             /* ← 右端まで強制的に広げる */
+  width: 100%;
+  background-color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+  z-index: 999;         /* コンテンツより前面に出す */
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: rgba(104, 108, 114, 0.493);
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+
+
+
+.header {
+  display: flex;              /* 横並びにする */
+  align-items: center;
+  background-color: #f1f1f1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+   height: 48px;  
+}
+
+.container-fluid {
+  padding-top: 16px;     /* ヘッダーの高さ分だけ下げる */
+}
+
+/* ロゴ部分：20% */
+.header .logo {
+  flex: 0 0 20%;              /* 幅を20%に固定 */
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+/* ボタン部分：30% */
+#buttuon-header {
+  flex: 0 0 30%;              /* 幅を30%に固定 */
+  text-align: center;
+}
+#buttuon-header a {
+  display: inline-block;
+  background: #0066cc;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
+#buttuon-header a:hover {
+  background: #004c99;
+  color: #e0e0e0;
+}
+
+/* ナビゲーション部分：50% */
+.header-right {
+  flex: 0 0 50%;        /* 幅を50%に固定 */
+  display: flex;        /* 横並びにする */
+  justify-content: flex-end; /* ← 右寄せ */
+  align-items: center;  /* 垂直方向も中央に揃える */
+}
+
+.header-right a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.header-right a.active {
+  font-weight: bold;
+}
+
+
+
+
+/* スマホ表示時 */
+@media (max-width: 768px) {
+  .header-right {
+    display: none; /* 初期は非表示 */
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .menu-icon {
+    display: block; /* アイコン表示 */
+  }
+
+  .header-right.active {
+    display: flex; /* アイコンを押すと表示 */
+  }
+}

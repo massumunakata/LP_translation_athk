@@ -1,0 +1,79 @@
+#buttuonsection {
+  text-align: center; /* セクション内の要素を中央寄せ */
+  margin: 20px 0;
+}
+.button a {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    max-width: 250px;
+    padding: 10px 25px;
+    color: #333;
+    font-family: "Noto Sans Japanese";
+    text-decoration: none;
+    color: #333;
+    line-height: 1.8;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    background: #eee;
+    border-radius: 9999px;
+    border-bottom: 2px solid #999;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, .3);
+
+     display: inline-block;   /* 中央寄せが効くようにする */
+  text-align: center;      /* テキストを中央寄せ */
+  white-space: nowrap;   /* 改行禁止 */
+
+}
+
+
+.button a:hover {
+    color: #fff;
+    background: #999;
+    border-bottom: 2px solid #fff;
+    transform: translateY(3px);
+}
+
+#buttuon-header {
+  text-align: center; /* セクション内の要素を中央寄せ */
+  margin: 10px 0;     /* 上下に余白 */
+}
+
+#buttuon-header .button a {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin: auto;
+  max-width: 160px;
+  padding: 3px 3px;
+  font-family: "Noto Sans Japanese";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+  background: #881818 !important;
+  color: #9b9a9a !important;
+  border-radius: 40px !important;
+  border-bottom: 2px solid #999;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, .3);
+}
+
+/* ボタンタイプ2 */
+#buttuon-header.button.type2 a {
+  background: #a1a1a1 !important; /* ← !importantで強制適用 */
+  color: #fff !important;
+  border-bottom: 2px solid #505255 !important;
+  border-radius: 40px !important;
+}
+#buttuon-header.button.type2 a:hover {
+  background: #004c99 !important;
+  color: #e0e0e0 !important;
+  border-bottom: 2px solid #fff !important;
+  transform: translateY(3px);
+}
+

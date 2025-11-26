@@ -1,0 +1,111 @@
+
+body {
+font-family: "Open Sans", Arial, Helvetica, sans-serif;
+padding: 30px;
+background: #f9f9f9;
+}
+h2 {
+text-align: center;
+margin-bottom: 30px;
+}
+.nya-customer-slider {
+width: 95%;
+margin: 0 auto;
+}
+
+
+.nya-voice-card {
+background: #fff;
+border: solid 1px #f0f0f096;
+padding: 12px;
+text-align: center;
+margin: 0 6px;
+border-radius: 8px; /* ← 角を丸くする */
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+height: 320px !important; /* ← 強制的に固定 */
+}
+
+.nya-voice-card {
+  background: #fff;
+  border: solid 1px #f0f0f096;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 12px;
+  margin: 0 6px;
+  display: flex;
+  flex-direction: column; /* 上部と下部を縦に分割 */
+}
+
+/* 上部：左右分割 */
+.nya-voice-top {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+/* 左側（写真）40% */
+.nya-voice-top .photo {
+  flex: 0 0 40%;   /* 固定で40% */
+}
+.nya-voice-top .photo img {
+  width: 80%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  border-radius: 50%;  /* ← 正円にする */
+  border: 2px solid #ddd; /* アイコンらしく枠線を追加（任意） */
+}
+
+/* 右側（会社名）60% */
+.nya-voice-top .company {
+  flex: 0 0 60%;   /* 固定で60% */
+  display: flex;
+  align-items: center;   /* 縦中央揃え */
+  justify-content: flex-start;
+  padding-left: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* 下部コメント */
+.nya-voice-comment {
+  font-size: 1rem;
+  color: #333;
+  text-align: left;
+  margin-top: auto;
+}
+
+
+
+
+.nya-voice-card img {
+width: 100%;
+height: auto;
+border-radius: 6px;
+margin-bottom: 10px;
+}
+.nya-voice-company {
+font-weight: bold;
+font-size: 0.95em;
+margin-bottom: 6px;
+color: #333;
+}
+.nya-voice-comment {
+font-size: 0.9em;
+line-height: 1.5;
+color: #555;
+}
+.nya-customer-slider .slick-track {
+display: flex;
+align-items: stretch;
+}
+.nya-customer-slider .slick-slide {
+transition: transform 0.5s;
+}
+@media (max-width: 768px) {
+.nya-voice-company {
+font-size: 0.9em;
+}
+.nya-voice-comment {
+font-size: 0.85em;
+}
+}
