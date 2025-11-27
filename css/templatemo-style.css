@@ -338,7 +338,7 @@ p {
   font-size: smaller;
   text-align: center;  横方向中央寄せ */
 
-    font-size: clamp(1rem, 2.5vw, 1.5rem); /* 画面幅に応じて可変 */
+  font-size: clamp(1.6rem, 1.2vw, 1.2rem); /* 画面幅に応じて可変 */
   white-space: nowrap;                   /* 折り返し禁止 */
   text-align: center;                    /* 中央寄せ */
 }
