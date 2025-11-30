@@ -76,21 +76,52 @@ worksData2.forEach(item => {
 });
 
 
-// 3つ目のテーブル用データ（料金表）
+
+const API_URL = "https://open.er-api.com/v6/latest/HKD";
+
 const priceData = [
-  { item: "展示会半日４時間", px: "8万円" },
-  { item: "商談",             px: "12万円" },
-  { item: "会議同時通訳",     px: "28万円" },
+  { item: "展示会半日４時間", px: 4000 },
+  { item: "商談",             px: 8000 },
+  { item: "会議同時通訳",     px: 10000 }
 ];
 
-const priceTbody = document.querySelector("#priceTable tbody");
-priceData.forEach(item => {
-  const tr = document.createElement("tr");
-  const tdItem = document.createElement("td");
-  tdItem.textContent = item.item;
-  const tdPx = document.createElement("td");
-  tdPx.textContent = item.px;
-  tr.appendChild(tdItem);
-  tr.appendChild(tdPx);
-  priceTbody.appendChild(tr);
-});
+async function fetchRateAndTable() {
+  const rateEl = document.getElementById("rate");
+  const metaEl = document.getElementById("meta");
+  const tableEl = document.getElementById("priceTable");
+
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const rate = data.rates.JPY; // HKD→JPYレート
+
+    // レート表示
+    rateEl.textContent = `1 HKD = ${rate.toFixed(3)} JPY`;
+
+    // 更新日時
+    const now = new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
+    metaEl.textContent = `更新日時: ${now}`;
+
+    // テーブル生成
+    tableEl.innerHTML = "";
+    priceData.forEach(p => {
+      const jpyValue = (p.px * rate).toFixed(0); // JPY換算
+      const row = `
+        <tr>
+          <td>${p.item}</td>
+          <td>${p.px} HKD</td>
+          <td>${jpyValue} JPY</td>
+        </tr>
+      `;
+      tableEl.insertAdjacentHTML("beforeend", row);
+    });
+
+  } catch (e) {
+    rateEl.textContent = "レート取得エラー";
+    metaEl.textContent = "";
+  }
+}
+
+// ページ読み込み時に実行
+fetchRateAndTable();
