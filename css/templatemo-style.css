@@ -26,6 +26,7 @@ body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
+  color: rgb(107, 107, 107); /* 同じグレー */
   color: #6b6b6b;
   overflow-x: hidden;
 }
@@ -41,10 +42,15 @@ a:hover {
 
 .container-fluid {
   max-width: 1200px;
+  color: rgb(107, 107, 107); /* 同じグレー */
+}
+
+.container {
+  color: rgb(107, 107, 107); /* 同じグレー */
 }
 
 .tm-bg-black-transparent {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(68, 68, 68, 0.5);
 }
 
 .tm-bg-white-transparent {
@@ -789,3 +795,15 @@ body {
 
 
 
+
+/* レート表示 */
+
+ .rate-section {
+      text-align: right;   /* 右寄せ */
+      font-size: 1rem;     /* 数字を大きく */
+    }
+    .meta {
+      text-align: right;   /* 更新日時も右寄せ */
+      color: #666;
+      margin-top: 0.5rem;
+    }

@@ -94,3 +94,5 @@ priceData.forEach(item => {
   tr.appendChild(tdPx);
   priceTbody.appendChild(tr);
 });
+
+
