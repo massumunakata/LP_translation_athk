@@ -75,53 +75,55 @@ worksData2.forEach(item => {
   worksTbody2.appendChild(tr);
 });
 
+  const API_URL = "https://open.er-api.com/v6/latest/HKD";
 
+    const priceData = [
+      { item: "展示会半日４時間", px: 5000 },
+      { item: "商談",             px: 8000 },
+      { item: "会議同時通訳",     px: 10000 }
+    ];
 
-const API_URL = "https://open.er-api.com/v6/latest/HKD";
+    async function fetchRateAndTable() {
+      const rateEl = document.getElementById("rate");
+      const metaEl = document.getElementById("meta");
+      const tableEl = document.getElementById("priceTable");
 
-const priceData = [
-  { item: "展示会半日４時間", px: 4000 },
-  { item: "商談",             px: 8000 },
-  { item: "会議同時通訳",     px: 10000 }
-];
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const rate = data.rates.JPY; // HKD→JPYレート
 
-async function fetchRateAndTable() {
-  const rateEl = document.getElementById("rate");
-  const metaEl = document.getElementById("meta");
-  const tableEl = document.getElementById("priceTable");
+        // レート表示
+        rateEl.textContent = `1 HKD = ${rate.toFixed(3)} JPY`;
 
-  try {
-    const res = await fetch(API_URL);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const rate = data.rates.JPY; // HKD→JPYレート
+        // 更新日時
+        const now = new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
+        metaEl.textContent = `更新日時: ${now}`;
 
-    // レート表示
-    rateEl.textContent = `1 HKD = ${rate.toFixed(3)} JPY`;
+        // テーブル生成
+        tableEl.innerHTML = "";
+        priceData.forEach(p => {
+          // HKD表記（カンマ区切り）
+          const hkdValue = `${p.px.toLocaleString()} HKD`;
 
-    // 更新日時
-    const now = new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
-    metaEl.textContent = `更新日時: ${now}`;
+          // JPY換算（万円単位、小数1桁、千の位四捨五入）
+          const jpyValue = (p.px * rate / 10000).toFixed(1) + "万円";
 
-    // テーブル生成
-    tableEl.innerHTML = "";
-    priceData.forEach(p => {
-      const jpyValue = (p.px * rate).toFixed(0); // JPY換算
-      const row = `
-        <tr>
-          <td>${p.item}</td>
-          <td>${p.px} HKD</td>
-          <td>${jpyValue} JPY</td>
-        </tr>
-      `;
-      tableEl.insertAdjacentHTML("beforeend", row);
-    });
+          const row = `
+            <tr>
+              <td>${p.item}</td>
+              <td>${hkdValue}</td>
+              <td>${jpyValue}</td>
+            </tr>
+          `;
+          tableEl.insertAdjacentHTML("beforeend", row);
+        });
 
-  } catch (e) {
-    rateEl.textContent = "レート取得エラー";
-    metaEl.textContent = "";
-  }
-}
+      } catch (e) {
+        rateEl.textContent = "レート取得エラー";
+        metaEl.textContent = "";
+      }
+    }
 
-// ページ読み込み時に実行
-fetchRateAndTable();
+    // ページ読み込み時に実行
+    fetchRateAndTable();

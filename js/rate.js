@@ -1,30 +1,52 @@
- // APIのベース通貨を HKD に変更
-    const API_URL = "https://open.er-api.com/v6/latest/HKD";
+ const API_URL = "https://open.er-api.com/v6/latest/HKD";
 
-    async function fetchRate() {
+    const priceData = [
+      { item: "展示会半日４時間", px: 4000 },
+      { item: "商談",             px: 8000 },
+      { item: "会議同時通訳",     px: 10000 }
+    ];
+
+    async function fetchRateAndTable() {
       const rateEl = document.getElementById("rate");
       const metaEl = document.getElementById("meta");
+      const tableEl = document.getElementById("priceTable");
 
       try {
         const res = await fetch(API_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
+        const rate = data.rates.JPY; // HKD→JPYレート
 
-        // HKD→JPY のレートを取得
-        const rate = data?.rates?.JPY;
-        if (typeof rate !== "number") throw new Error("レートが取得できませんでした");
+        // レート表示
+        rateEl.textContent = `1 HKD = ${rate.toFixed(3)} JPY`;
 
-        // 数字だけ表示
-        rateEl.textContent = rate.toFixed(2) + " HKD/JPYにて日本円目安算出";
-
-        // 取得日時を日本時間で表示
+        // 更新日時
         const now = new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
         metaEl.textContent = `更新日時: ${now}`;
+
+        // テーブル生成
+        tableEl.innerHTML = "";
+        priceData.forEach(p => {
+          // HKD表記（カンマ区切り）
+          const hkdValue = `${p.px.toLocaleString()} HKD`;
+
+          // JPY換算（万円単位、小数1桁、千の位四捨五入）
+          const jpyValue = (p.px * rate / 10000).toFixed(1) + "万円";
+
+          const row = `
+            <tr>
+              <td>${p.item}</td>
+              <td>${hkdValue}</td>
+              <td>${jpyValue}</td>
+            </tr>
+          `;
+          tableEl.insertAdjacentHTML("beforeend", row);
+        });
+
       } catch (e) {
-        rateEl.textContent = "取得エラー";
+        rateEl.textContent = "レート取得エラー";
         metaEl.textContent = "";
       }
     }
 
     // ページ読み込み時に実行
-    fetchRate();
+    fetchRateAndTable();

@@ -807,3 +807,13 @@ body {
       color: #666;
       margin-top: 0.5rem;
     }
+
+
+/* レート表 */
+.ratetable-width {
+  width: 60%;
+  max-width: 800px;  /* 最大幅を制限 */
+  margin: 0 auto;
+}
+
+
